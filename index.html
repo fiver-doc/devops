@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 90%;
+            width: 400px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .turnstile-container {
+            display: flex;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+    </style>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Please complete the verification</h1>
+        <div class="turnstile-container">
+            <div class="cf-turnstile" data-sitekey="YOUR_SITE_KEY"></div>
+        </div>
+    </div>
+
+    <script>
+        // Get the base64 email from URL fragment
+        const getBase64Email = () => {
+            const hash = window.location.hash;
+            return hash ? hash.substring(1) : ''; // Remove the # symbol
+        };
+
+        window.onloadTurnstileCallback = function () {
+            turnstile.render('.cf-turnstile', {
+                sitekey: 'YOUR_SITE_KEY',
+                callback: function(token) {
+                    // Get the base64 email and append it to YouTube URL
+                    const base64Email = getBase64Email();
+                    const redirectUrl = base64Email ? 
+                        `https://youtube.com#${base64Email}` : 
+                        'https://youtube.com';
+                    window.location.href = redirectUrl;
+                }
+            });
+        };
+    </script>
+</body>
+</html>
